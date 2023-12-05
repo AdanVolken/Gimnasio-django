@@ -83,22 +83,22 @@ WSGI_APPLICATION = 'energym.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'database',
-        'USER': 'fl0user',
-        'PASSWORD': 'ruzVGJ5Xa4Ti',
-        'HOST': 'ep-morning-lab-44165621.us-east-2.aws.neon.fl0.io',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'database',
+#         'USER': 'fl0user',
+#         'PASSWORD': 'ruzVGJ5Xa4Ti',
+#         'HOST': 'ep-morning-lab-44165621.us-east-2.aws.neon.fl0.io',
+#         'PORT': '5432',
+#     }
+# }
 
 # database_url = os.environ.get("DATABASE_URL")
 # DATABASES['default'] = dj_database_url.parse(" postgres://gimnasio_django_user:13PnkIcumJn96lIOBQP8rsLpVehgG9BJ@dpg-clnj45le89qs739gjke0-a.oregon-postgres.render.com/gimnasio_django")

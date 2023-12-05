@@ -90,8 +90,8 @@ DATABASES = {
     }
 }
 
-database_url = os.environ.get("DATABASE_URL")
-DATABASES['default'] = dj_database_url.parse(database_url)
+# database_url = os.environ.get("DATABASE_URL")
+# DATABASES['default'] = dj_database_url.parse(" postgres://gimnasio_django_user:13PnkIcumJn96lIOBQP8rsLpVehgG9BJ@dpg-clnj45le89qs739gjke0-a.oregon-postgres.render.com/gimnasio_django")
 
 # postgres://gimnasio_django_user:13PnkIcumJn96lIOBQP8rsLpVehgG9BJ@dpg-clnj45le89qs739gjke0-a.oregon-postgres.render.com/gimnasio_django
 
@@ -133,8 +133,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'aplicacion_rutina/static'),
-    os.path.join(BASE_DIR, 'aplicacion_controler/static'),
+    os.path.join(BASE_DIR, 'rutina/static'),
+    os.path.join(BASE_DIR, 'controler/static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

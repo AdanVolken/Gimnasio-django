@@ -15,8 +15,8 @@ import os
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-# BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -82,28 +82,12 @@ WSGI_APPLICATION = 'energym.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+DATABASE = {
+    'default': dj_database_url.config(
+        default ='sqlite:///db.sqlite3',
+        conn_max_age = 600
+    )
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'database',
-#         'USER': 'fl0user',
-#         'PASSWORD': 'ruzVGJ5Xa4Ti',
-#         'HOST': 'ep-morning-lab-44165621.us-east-2.aws.neon.fl0.io',
-#         'PORT': '5432',
-#     }
-# }
-
-# database_url = os.environ.get("DATABASE_URL")
-# DATABASES['default'] = dj_database_url.parse(" postgres://gimnasio_django_user:13PnkIcumJn96lIOBQP8rsLpVehgG9BJ@dpg-clnj45le89qs739gjke0-a.oregon-postgres.render.com/gimnasio_django")
-
-# postgres://gimnasio_django_user:13PnkIcumJn96lIOBQP8rsLpVehgG9BJ@dpg-clnj45le89qs739gjke0-a.oregon-postgres.render.com/gimnasio_django
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -142,11 +126,12 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'rutina/static'),
-    os.path.join(BASE_DIR, 'controler/static'),
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+if not DEBUG:
+
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'  
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

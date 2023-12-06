@@ -82,24 +82,24 @@ WSGI_APPLICATION = 'energym.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASE = {
-#     'default': dj_database_url.config(
-#         default ='sqlite:///db.sqlite3',
-#         conn_max_age = 600
-#     )
-# }
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gimnasio_django',
-        'USER': 'gimnasio_django_user',
-        'PASSWORD': '13PnkIcumJn96lIOBQP8rsLpVehgG9BJ',
-        'HOST': 'dpg-clnj45le89qs739gjke0-a',  # Puedes cambiarlo según la configuración de Render.com
-        'PORT': '5432',      # Puedes cambiarlo según la configuración de Render.com
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'gimnasio_django',
+#         'USER': 'gimnasio_django_user',
+#         'PASSWORD': '13PnkIcumJn96lIOBQP8rsLpVehgG9BJ',
+#         'HOST': 'dpg-clnj45le89qs739gjke0-a',  # Puedes cambiarlo según la configuración de Render.com
+#         'PORT': '5432',      # Puedes cambiarlo según la configuración de Render.com
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

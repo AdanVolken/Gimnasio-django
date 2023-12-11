@@ -21,7 +21,7 @@
                 
                 {% for ejercicio in ejercicios %}
                 <div class="tarjeta">
-                    <img class="ejercicios-img" src="{{ ejercicio.imagen.url }}" alt="" enctype="multipart/form-data">
+                    <img class="ejercicios-img" src="{{ MEDIA_URL }}{{ ejercicio.imagen.url }}" alt="" enctype="multipart/form-data">
                     <h3>{{ ejercicio.nombre }}</h3>
                     <a href="{% url 'editar_ejercicio' ejercicio.id %}"><button type="submit">
                         Editar

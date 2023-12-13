@@ -24,7 +24,7 @@
         </tr>
         {% for clave, clientes_count in resultados_por_dia_hora.items %}
             <tr class="{% cycle 'blanco' 'gris' %}">
-                <td>{{ clave|slice:":3" }}</td>
+                <td>{{ clave|slice:":1" }}</td>
                 <td>{{ clave|slice:"-2:" }}</td>
                 <td>{{ clientes_count }}</td>
             </tr>

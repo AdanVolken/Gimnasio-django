@@ -258,7 +258,7 @@ def horarios(request):
 
     for dia in dias_semana:
         for horario in horarios:
-            clave = f"{dia} {horario}"
+            clave = f"{dia}                 {horario}"
             clientes_count = Dia.objects.filter(dia=dia, hora__horario=horario).aggregate(clientes_count=Count('clientes'))['clientes_count'] or 0
 
             if clave not in resultados_por_dia_hora:

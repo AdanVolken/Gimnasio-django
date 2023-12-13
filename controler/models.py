@@ -15,11 +15,16 @@ class Cliente(models.Model):
     def __str__(self):
         return self.nombre
     
+class Hora(models.Model):
+    horario = models.IntegerField()
+
+    def __str__(self):
+         return str(self.horario)
+
 
 class Dia(models.Model):
     dia = models.CharField(max_length=15)
-    numero = models.IntegerField()
-    hora = models.TimeField(default=datetime.now().time()) 
+    hora = models.ForeignKey(Hora, on_delete=models.CASCADE, blank=True) 
     clientes = models.ForeignKey(Cliente, blank=True, on_delete=models.CASCADE)
     
 

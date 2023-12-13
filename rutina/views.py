@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_list_or_404, render, get_object_or_404, redirect
 from .models import Rutina, Ejercicio
 from .forms import FormularioEjercicio,FormularioRutinas
 from django.contrib.auth.decorators import login_required
@@ -66,6 +66,8 @@ def agregar_ejercicio(request):
     return render(request, 'agregar_ejercicio.html', {'form': ejercicio})
 
 
+
+
 ##################################################################################################################
 #Editar Registros de Formularios
 ##################################################################################################################
@@ -113,3 +115,12 @@ def actualizar_rutina(request, id_rutina):
         'rutina': rutina,
         'form': form_rutina
     })
+
+##################################################################################################################
+#Eliminar Ejercicio
+##################################################################################################################
+@login_required
+def eliminar_ejercicio(request, id):
+    ejercicio_eliminado = get_object_or_404(Ejercicio,id= id)
+    ejercicio_eliminado.delete()
+    return redirect('ejercicios')

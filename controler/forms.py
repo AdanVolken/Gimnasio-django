@@ -16,4 +16,4 @@ class FormularioPago(forms.ModelForm):
 class FormularioDia(forms.ModelForm):
     class Meta:
         model = Dia
-        fields = ['dia','numero', 'hora']
+        fields = ['dia', 'hora']

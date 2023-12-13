@@ -1,0 +1,35 @@
+{% extends 'navbar.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% block extra_styles %}
+    {% load static %}
+      <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+      <link rel="stylesheet" href="{% static 'css/horarios.css' %}">
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <h1>Resultados por Día y Hora</h1>
+
+    <table border="1">
+        <tr>
+            <th>Día</th>
+            <th>Hora</th>
+            <th>Clientes</th>
+        </tr>
+        {% for clave, clientes_count in resultados_por_dia_hora.items %}
+            <tr class="{% cycle 'blanco' 'gris' %}">
+                <td>{{ clave|slice:":3" }}</td>
+                <td>{{ clave|slice:"-2:" }}</td>
+                <td>{{ clientes_count }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endblock %}
+</body>
+</html>

@@ -12,7 +12,8 @@ from .views import (
     editar_cliente,
     actualizar_cliente,
     descargar_pdf,
-    registro
+    registro,
+    horarios, 
 
 )
 
@@ -27,6 +28,9 @@ urlpatterns = [
     path('cliente/actualizar/<int:id>', actualizar_cliente, name ='actualizar_cliente'),
     path('cliente/<int:id>/descargar_pdf/', descargar_pdf, name='descargar_pdf'),
     path('pagos/', pagos, name='pagos'),
+    path("horarios/", horarios, name="horarios"),
+    
+
 
 ]    
     

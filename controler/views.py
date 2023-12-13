@@ -1,12 +1,13 @@
 
+import faulthandler
 from django.http import HttpResponse
 from django.shortcuts import redirect, render , get_object_or_404
 from django.contrib.auth import login,authenticate 
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from .forms import FormularioCliente,FormularioPago,FormularioDia
-from .models import Cliente,Pago,Dia
-from django.db.models import Sum
+from .models import Cliente,Pago,Dia,Hora
+from django.db.models import Sum, F ,Count
 from datetime import date as d
 from django.contrib.auth.decorators import login_required
 
@@ -14,6 +15,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter,landscape
 
 from PIL import Image
+
+from controler import models
 
 # Create your views here.
 
@@ -91,7 +94,7 @@ def cliente_detail(request, id):
     form = FormularioPago()
     pagos = Pago.objects.filter(cliente=id).order_by("-fecha_creacion")[:5]
     form_dia = FormularioDia()
-    dias = Dia.objects.filter(clientes=id).order_by('numero')
+    dias = Dia.objects.filter(clientes=id).order_by('dia')
     
     # Recuperar los ejercicios de la rutina del cliente
     rutina_ejercicios = []
@@ -123,11 +126,10 @@ def cliente_detail(request, id):
             form_dia = FormularioDia(request.POST)
             if form_dia.is_valid():
                 # Obtener los datos del formulario
-                dia = form_dia.cleaned_data['dia']
-                numero = form_dia.cleaned_data['numero']
+                dia = form_dia.cleaned_data['dia'].capitalize()
                 hora = form_dia.cleaned_data['hora']
                 # Agregamos los datos del clinte que estamos usando
-                dia_rutina = Dia(clientes=cliente, dia=dia, numero=numero, hora=hora)
+                dia_rutina = Dia(clientes=cliente, dia=dia, hora=hora)
                 #Guardamos los datos en la BDD
                 dia_rutina.save()
             else :    
@@ -147,7 +149,7 @@ def cliente_detail(request, id):
     form = FormularioPago()
     pagos = Pago.objects.filter(cliente=id)
     form_dia = FormularioDia()
-    dias = Dia.objects.filter(clientes=id).order_by('numero')
+    dias = Dia.objects.filter(clientes=id).order_by('dia')
     return render(request, 'cliente_id.html', {
             'cliente': cliente,
             'form': form,
@@ -247,3 +249,21 @@ def pagos(request):
     return render(request, 'pagos.html', {
         'dias_con_pagos': dias_con_pagos,
     })
+
+def horarios(request):
+    dias_semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
+    horarios = [7, 8, 9, 10, 10, 11, 14, 15, 15, 16, 18, 19]
+
+    resultados_por_dia_hora = {}
+
+    for dia in dias_semana:
+        for horario in horarios:
+            clave = f"{dia} {horario}"
+            clientes_count = Dia.objects.filter(dia=dia, hora__horario=horario).aggregate(clientes_count=Count('clientes'))['clientes_count'] or 0
+
+            if clave not in resultados_por_dia_hora:
+                resultados_por_dia_hora[clave] = clientes_count
+            else:
+                resultados_por_dia_hora[clave] += clientes_count
+
+    return render(request, 'horarios.html', {'resultados_por_dia_hora': resultados_por_dia_hora})

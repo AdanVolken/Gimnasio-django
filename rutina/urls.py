@@ -11,7 +11,9 @@ from .views import (
     editar_ejercicio,
     actualizar_ejercicio,
     editar_rutina,
-    actualizar_rutina,  
+    actualizar_rutina, 
+    eliminar_ejercicio,
+
 )
 
 
@@ -24,6 +26,7 @@ urlpatterns = [
     path('ejercicios/actualizar/<int:id_ejercicio>/', actualizar_ejercicio, name='actualizar_ejercicio'),
     path('editar/<int:id_rutina>/', editar_rutina, name='editar_rutina'),
     path('actualizar/<int:id_rutina>/', actualizar_rutina, name='actualizar_rutina'),
+    path('eliminar/<int:id>', eliminar_ejercicio, name="eliminar_ejercicio"),
     
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

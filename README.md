@@ -5,5 +5,5 @@ Aplicación para realizar un seguimiento de las clientes en un gimnasio
 
 URL : https://gimnasio-controler.onrender.com
 
-Usuario: userprueba
-Contraseña: usuarioprueba
+Usuario: prueba  
+Contraseña: prueba17
